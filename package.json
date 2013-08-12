@@ -1,0 +1,40 @@
+{
+  "name": "ra-storage",
+  "version": "0.0.1",
+  "description": "AngularJS Module: localStorage",
+  "main": "dist/ra-storage.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/red-ant/ra-storage.git"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "localstorage",
+    "cookie"
+  ],
+  "author": "Dan Callaghan",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/red-ant/ra-storage/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-jasmine": "~0.1.0",
+    "karma-requirejs": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma": "~0.10.1",
+    "grunt-karma": "~0.6.1",
+    "matchdep": "~0.1.2",
+    "grunt-contrib-jshint": "~0.6.2",
+    "karma-osx-reporter": "0.0.3"
+  }
+}
