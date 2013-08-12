@@ -10,6 +10,9 @@ describe('Service: raStorage >', function() {
     });
   });
 
+  // TODO: test configuration options
+  // TODO: test cookie fallback
+
   describe('basic >', function() {
     beforeEach(function() {
       storage = raStorage('basic');
@@ -25,7 +28,6 @@ describe('Service: raStorage >', function() {
 
     it('should set a basic integer', function() {
       storage.set(1);
-      dump(localStorage.getItem('basic'));
       expect(storage.get()).toBe(1);
     });
 
@@ -48,6 +50,7 @@ describe('Service: raStorage >', function() {
       storage.set({});
       storage.set('key', 'value');
       expect(storage.get()).toEqual({ key: 'value' });
+
       storage.setKey('foo', 'bar');
       expect(storage.get()).toEqual({ key: 'value', foo: 'bar' });
     });
@@ -68,8 +71,10 @@ describe('Service: raStorage >', function() {
     it('should remove the key of an object in storage', function() {
       storage.set({ key: 'value', foo: 'bar' });
       expect(storage.get()).toEqual({ key: 'value', foo: 'bar' });
+
       storage.destroy('key');
       expect(storage.get()).toEqual({ foo: 'bar' });
+
       storage.destroyKey('foo');
       expect(storage.get()).toEqual({});
     });
