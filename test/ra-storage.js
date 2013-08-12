@@ -1,125 +1,138 @@
-describe('Service: raStorage', function() {
-  var storage_basic,
-      storage_with_default;
+describe('Service: raStorage >', function() {
+  var storage,
+      raStorage;
 
   beforeEach(function() {
     module('raStorage');
 
-    inject(function(raStorage) {
-      storage_basic        = raStorage('basic');
-      storage_with_default = raStorage('with_default', 'default_value');
+    inject(function($injector) {
+      raStorage = $injector.get('raStorage');
     });
   });
 
-  afterEach(function() {
-    storage_basic.destroy();
-    storage_with_default.destroy();
-  });
+  describe('basic >', function() {
+    beforeEach(function() {
+      storage = raStorage('basic');
+    });
 
-  describe('basic', function() {
+    afterEach(function() {
+      storage.destroy();
+    });
 
     it('should return null for an unset key', function() {
-      expect(storage_basic.get()).toBeNull();
+      expect(storage.get()).toBeNull();
     });
 
     it('should set a basic integer', function() {
-      storage_basic.set(1);
-      expect(storage_basic.get()).toBe(1);
+      storage.set(1);
+      dump(localStorage.getItem('basic'));
+      expect(storage.get()).toBe(1);
     });
 
     it('should set and get a basic string', function() {
-      storage_basic.set('Nailed it.');
-      expect(storage_basic.get()).toBe('Nailed it.');
+      storage.set('Nailed it.');
+      expect(storage.get()).toBe('Nailed it.');
     });
 
     it('should set and get a basic object', function() {
-      storage_basic.set({ key: 'value' });
-      expect(storage_basic.get()).toEqual({ key: 'value' });
+      storage.set({ key: 'value' });
+      expect(storage.get()).toEqual({ key: 'value' });
     });
 
     it('should set and get a basic array', function() {
-      storage_basic.set([1, 2, 3]);
-      expect(storage_basic.get()).toEqual([1, 2, 3]);
-    });
-
-    it('should return a default value if there is no value set', function() {
-      expect(storageWithDefault.get()).toBe('foo');
+      storage.set([1, 2, 3]);
+      expect(storage.get()).toEqual([1, 2, 3]);
     });
 
     it('should set the key of an object in storage', function() {
-      storage_basic.set({});
-      storage_basic.set('key', 'value');
-      expect(storage_basic.get()).toEqual({ key: 'value' });
-      storage_basic.setByKey('foo', 'bar');
-      expect(storage_basic.get()).toEqual({ key: 'value', foo: 'bar' });
+      storage.set({});
+      storage.set('key', 'value');
+      expect(storage.get()).toEqual({ key: 'value' });
+      storage.setKey('foo', 'bar');
+      expect(storage.get()).toEqual({ key: 'value', foo: 'bar' });
     });
 
     it('should get a specific key from an object in storage', function() {
-      storage_basic.set({ key: 'value', foo: 'bar' });
-      expect(storage_basic.get('key')).toBe('value');
-      expect(storage_basic.getByKey('foo')).toBe('bar');
+      storage.set({ key: 'value', foo: 'bar' });
+      expect(storage.get('key')).toBe('value');
+      expect(storage.getKey('foo')).toBe('bar');
     });
 
     it('should remove an object from storage', function() {
-      storage_basic.set({ key: 'value' });
-      expect(storage_basic.get()).toEqual({ key: 'value' });
-      storage_basic.destroy();
-      expect(storage_basic.get()).toBeNull();
+      storage.set({ key: 'value' });
+      expect(storage.get()).toEqual({ key: 'value' });
+      storage.destroy();
+      expect(storage.get()).toBeNull();
     });
 
     it('should remove the key of an object in storage', function() {
-      storage_basic.set({ key: 'value', foo: 'bar' });
-      expect(storage_basic.get()).toEqual({ key: 'value', foo: 'bar' });
-      storage_basic.destroy('key');
-      expect(storage_basic.get()).toEqual({ foo: 'bar' });
-      storage_basic.destroyByKey('foo');
-      expect(storage_basic.get()).toEqual({});
+      storage.set({ key: 'value', foo: 'bar' });
+      expect(storage.get()).toEqual({ key: 'value', foo: 'bar' });
+      storage.destroy('key');
+      expect(storage.get()).toEqual({ foo: 'bar' });
+      storage.destroyKey('foo');
+      expect(storage.get()).toEqual({});
     });
 
     it('should return false when destroying an undefined property of an object in storage', function() {
-      storage_basic.set({ key: 'value' });
-      expect(storage_basic.destroy('foo')).toBeFalsy();
-    });
-
-    it('should return the default value when a storage entry has been removed', function() {
-      storageWithDefault.set({ key: 'value' });
-      storageWithDefault.destroy();
-      expect(storageWithDefault.get()).toBe('foo');
+      storage.set({ key: 'value' });
+      expect(storage.destroy('foo')).toBeFalsy();
     });
 
     it('should create a new object when setting by key on a non-existent entry', function() {
-      storage_basic.set('key', 'value');
-      expect(storage_basic.get()).toEqual({ key: 'value' });
+      storage.set('key', 'value');
+      expect(storage.get()).toEqual({ key: 'value' });
     });
 
     it('should return undefined for a non-existent key of stored object', function() {
-      expect(storage_basic.get('foo')).toBeUndefined();
-      storage_basic.set({ key: 'value' });
-      expect(storage_basic.get('foo')).toBeUndefined();
+      expect(storage.get('foo')).toBeUndefined();
+      storage.set({ key: 'value' });
+      expect(storage.get('foo')).toBeUndefined();
     });
 
     it('should handle type mismatches when setting by key', function() {
       var store = 'foo';
-      storage_basic.set(store);
+      storage.set(store);
       expect(function() {
-        storage_basic.setByKey('key', 'value');
+        storage.setKey('key', 'value');
       }).toThrow('Type mismatch: trying to get/set a key for the stored value of type ' + typeof store);
     });
 
     it('should handle type mismatches when getting by key', function() {
       var store = 'foo';
-      storage_basic.set(store);
+      storage.set(store);
       expect(function() {
-        storage_basic.getByKey('key');
+        storage.getKey('key');
       }).toThrow('Type mismatch: trying to get/set a key for the stored value of type ' + typeof store);
     });
 
     it('should handle type mismatches when deleting by key', function() {
       var store = 'foo';
-      storage_basic.set(store);
+      storage.set(store);
       expect(function() {
-        storage_basic.destroyByKey('key');
+        storage.destroyKey('key');
       }).toThrow('Type mismatch: trying to get/set a key for the stored value of type ' + typeof store);
+    });
+  });
+
+  describe('with default >', function() {
+    beforeEach(function() {
+      storage = raStorage('with_default', 'default_value');
+    });
+
+    afterEach(function() {
+      storage.destroy();
+    });
+
+    it('should return a default value if there is no value set', function() {
+      expect(storage.get()).toBe('default_value');
+    });
+
+    it('should return the default value when a storage entry has been removed', function() {
+      storage.set({ key: 'value' });
+      storage.destroy();
+
+      expect(storage.get()).toBe('default_value');
     });
   });
 });

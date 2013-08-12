@@ -14,6 +14,8 @@
     try {
       localStorage.setItem('storage_test', 1);
       localStorage.removeItem('storage_test');
+
+      return false;
     } catch (e) {
       if (e.code === 22 && e.name === 'QUOTA_EXCEEDED_ERR') {
         return true;
@@ -38,9 +40,15 @@
         },
 
         $get: function($log) {
-          return function(key, default_value) {
+          return function(storage_key, default_value) {
             var storage,
                 supported = !!(isSupported() && !isPrivateBrowsing());
+
+
+            // Prefix the key if necessary
+            if (config.prefix) {
+              storage_key = config.prefix + '.' + storage_key;
+            }
 
             if (supported) {
               storage = window.localStorage;
@@ -60,19 +68,14 @@
               };
             }
 
-            // Prefix the key if necessary
-            if (config.prefix) {
-              key = config.prefix + '.' + key;
-            }
-
             var set = function(obj) {
               obj = angular.toJson(obj);
 
-              return storage.setItem(key, obj);
+              return storage.setItem(storage_key, obj);
             };
 
-            var get = function(key) {
-              var value = storage.getItem(key);
+            var get = function() {
+              var value = storage.getItem(storage_key);
 
               if (value) {
                 try {
@@ -90,7 +93,7 @@
             };
 
             var destroy = function() {
-              return storage.removeItem(key);
+              return storage.removeItem(storage_key);
             };
 
             var checkObject = function(obj) {
@@ -130,7 +133,7 @@
                 checkObject(obj);
 
                 obj[key] = value;
-                return this._set(obj);
+                return set(obj);
               },
 
               getKey: function(key) {
