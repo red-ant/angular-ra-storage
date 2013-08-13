@@ -2,7 +2,7 @@
   "name": "ra-storage",
   "version": "0.0.1",
   "description": "AngularJS Module: localStorage",
-  "main": "dist/ra-storage.js",
+  "main": "ra-storage.js",
   "directories": {
     "test": "test"
   },
