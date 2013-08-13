@@ -1,6 +1,6 @@
 {
   "name": "ra-storage",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AngularJS Module: localStorage",
   "main": "ra-storage.js",
   "directories": {
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-bower": "~0.6.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-jshint": "~0.6.2",
@@ -38,6 +39,7 @@
     "karma-osx-reporter": "0.0.3",
     "karma-phantomjs-launcher": "~0.1.0",
     "karma-requirejs": "~0.1.0",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "grunt-bower-task": "~0.3.1"
   }
 }
