@@ -26,7 +26,7 @@
   }
 
 
-  angular.module('raStorage', []).
+  angular.module('ra.storage', []).
 
     provider('raStorage', function() {
       var config = {

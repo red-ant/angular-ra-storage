@@ -10,20 +10,20 @@
       dist: 'dist',
 
       clean: {
-        dist: ['ra-storage.js', 'ra-storage.min.js']
+        dist: ['angular-ra-storage.js', 'angular-ra-storage.min.js']
       },
 
       concat: {
         dist: {
-          src:  ['src/ra-storage.js'],
-          dest: 'ra-storage.js'
+          src:  ['src/angular-ra-storage.js'],
+          dest: 'angular-ra-storage.js'
         }
       },
 
       uglify: {
         dist: {
-          src:  ['src/ra-storage.js'],
-          dest: 'ra-storage.min.js'
+          src:  ['src/angular-ra-storage.js'],
+          dest: 'angular-ra-storage.min.js'
         }
       },
 

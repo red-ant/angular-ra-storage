@@ -1,14 +1,14 @@
 {
-  "name": "ra-storage",
-  "version": "0.0.2",
+  "name": "angular-ra-storage",
+  "version": "0.0.3",
   "description": "AngularJS Module: localStorage",
-  "main": "ra-storage.js",
+  "main": "angular-ra-storage.js",
   "directories": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/red-ant/ra-storage.git"
+    "url": "git://github.com/red-ant/angular-ra-storage.git"
   },
   "keywords": [
     "angular",
@@ -19,7 +19,7 @@
   "author": "Dan Callaghan",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/red-ant/ra-storage/issues"
+    "url": "https://github.com/red-ant/angular-ra-storage/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

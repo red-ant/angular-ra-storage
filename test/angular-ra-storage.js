@@ -3,7 +3,7 @@ describe('Service: raStorage >', function() {
       raStorage;
 
   beforeEach(function() {
-    module('raStorage');
+    module('ra.storage');
 
     inject(function($injector) {
       raStorage = $injector.get('raStorage');

@@ -10,8 +10,8 @@ module.exports = function(config) {
     files: [
       'components/angular/angular.js',
       'components/angular-mocks/angular-mocks.js',
-      'src/ra-storage.js',
-      'test/ra-storage.js'
+      'src/angular-ra-storage.js',
+      'test/angular-ra-storage.js'
     ],
 
     exclude: [],
