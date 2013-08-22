@@ -1,7 +1,6 @@
 {
   "name": "angular-ra-storage",
   "version": "0.0.3",
-  "private": true,
   "ignore": [
     "**/.*",
     "components",
