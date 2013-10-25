@@ -17,7 +17,7 @@
 
       return false;
     } catch (e) {
-      if (e.code === 22 && e.name === 'QUOTA_EXCEEDED_ERR') {
+      if (e.code === 22 && (e.name === 'QUOTA_EXCEEDED_ERR' || e.name === 'QuotaExceededError')) {
         return true;
       }
 
