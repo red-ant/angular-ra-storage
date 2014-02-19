@@ -103,6 +103,10 @@
             };
 
             return {
+              setStorageKey: function(key) {
+                storage_key = key;
+              },
+
               set: function(key_or_value, value) {
                 if (arguments.length === 1) {
                   return set(key_or_value);
