@@ -27,13 +27,6 @@
         }
       },
 
-      bower: {
-        options: {
-          copy: false
-        },
-        install: {}
-      },
-
       jshint: {
         options: {
           jshintrc: '.jshintrc'
@@ -58,14 +51,14 @@
 
       bump: {
         options: {
-          files:       ['package.json', 'bower.json'],
-          commitFiles: ['package.json', 'bower.json'],
+          files:       ['package.json'],
+          commitFiles: ['package.json'],
           pushTo:      'origin'
         }
       }
     });
 
     grunt.registerTask('test', 'karma:dev');
-    grunt.registerTask('build', ['jshint:all', 'bower', 'karma:dist', 'clean', 'concat:dist', 'uglify:dist']);
+    grunt.registerTask('build', ['jshint:all', 'karma:dist', 'clean', 'concat:dist', 'uglify:dist']);
   };
 })();
