@@ -27,13 +27,6 @@
         }
       },
 
-      bower: {
-        options: {
-          copy: false
-        },
-        install: {}
-      },
-
       jshint: {
         options: {
           jshintrc: '.jshintrc'
@@ -66,6 +59,6 @@
     });
 
     grunt.registerTask('test', 'karma:dev');
-    grunt.registerTask('build', ['jshint:all', 'bower', 'karma:dist', 'clean', 'concat:dist', 'uglify:dist']);
+    grunt.registerTask('build', ['jshint:all', 'karma:dist', 'clean', 'concat:dist', 'uglify:dist']);
   };
 })();

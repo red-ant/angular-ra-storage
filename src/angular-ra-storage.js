@@ -26,7 +26,7 @@
   }
 
 
-  angular.module('ra.storage', []).
+  angular.module('ra.storage', ['ngCookies']).
 
     provider('raStorage', function() {
       var config = {
@@ -39,7 +39,7 @@
           _.merge(config, _config);
         },
 
-        $get: function($log) {
+        $get: function($cookies, $log) {
           return function(storage_key, default_value) {
             var storage,
                 supported = !!(isSupported() && !isPrivateBrowsing());
@@ -55,15 +55,15 @@
             } else {
               storage = {
                 setItem: function(key, value) {
-                  $.cookie(key, value, { path: '/' });
+                  $cookies.put(key, value, { path: '/' });
                 },
 
                 getItem: function(key) {
-                  return $.cookie(key);
+                  return $cookies.get(key);
                 },
 
                 removeItem: function(key) {
-                  $.removeCookie(key);
+                  $cookies.remove(key);
                 }
               };
             }
